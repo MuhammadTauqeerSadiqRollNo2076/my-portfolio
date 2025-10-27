@@ -1,5 +1,37 @@
+// import React from 'react';
+// //import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { HashRouter as Router, Routes, Route } from 'react-router-dom'; 
+// import Navbar from './components/Navbar';
+// import Footer from './components/Footer';
+// import Home from './pages/Home';
+// import About from './pages/About';
+// import Projects from './pages/Projects';
+// import Contact from './pages/Contact';
+// import Resume from './components/Resume';
+
+// export default function App() {
+//   return (
+//     <Router>
+//       <div className="min-h-screen flex flex-col">
+//         <Navbar />
+//         <main className="flex-1">
+//           <Routes>
+//             <Route path="/" element={<Home />} />
+//             <Route path="/about" element={<About />} />
+//             <Route path="/projects" element={<Projects />} />
+//             <Route path="/contact" element={<Contact />} />
+//             <Route path="/resume" element={<Resume />} />
+//           </Routes>
+//         </main>
+//         <Footer />
+//       </div>
+//     </Router>
+//   );
+// }
+
+
+
 import React from 'react';
-//import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'; 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -9,7 +41,8 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Resume from './components/Resume';
 
-export default function App() {
+// ✅ Ensure this is the default export
+const App = () => {
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
@@ -28,3 +61,6 @@ export default function App() {
     </Router>
   );
 }
+
+// ✅ Make sure this line exists
+export default App;
