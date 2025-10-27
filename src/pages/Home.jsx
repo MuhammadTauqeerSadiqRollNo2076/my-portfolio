@@ -279,7 +279,7 @@ export default function Home() {
               <img
                 src={profileImage}
                 alt="Engr. Tauqeer Sadiq"
-                className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover rounded-full border-4 border-gray-800 shadow-2xl transform group-hover:scale-105 transition duration-500"
+                className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-fit rounded-full border-4 border-gray-800 shadow-2xl transform group-hover:scale-105 transition duration-500"
               />
             </motion.div>
           </div>
