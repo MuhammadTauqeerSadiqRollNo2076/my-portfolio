@@ -294,7 +294,7 @@ export default function Contact() {
   ];
 
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900 transition-colors duration-500">
+    <section className="min-h-screen mt-5 py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
 
         {/* Section Header */}
