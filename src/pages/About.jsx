@@ -348,7 +348,7 @@ export default function About() {
   };
 
   const education = [
-    { degree: "BSc Software Engineering", institution: "University of Engineering", year: "2020-2024" },
+    { degree: "BS Software Engineering", institution: "University of Engineering", year: "2020-2024" },
     { degree: "Machine Learning Specialization", institution: "DeepLearning.AI", year: "2023" },
     { degree: "Full Stack Development", institution: "Meta", year: "2022" },
   ];
@@ -368,10 +368,10 @@ export default function About() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-5"
+            className="inline-flex items-center gap-2 px-3 mt-5 sm:px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-5"
           >
-            <Sparkles size={18} className="text-indigo-600 dark:text-indigo-400" />
-            <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">About Me</span>
+            <Sparkles size={18} className="text-indigo-600 dark:text-indigo-400 " />
+            <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 ">About Me</span>
           </motion.div>
 
           <motion.h2
