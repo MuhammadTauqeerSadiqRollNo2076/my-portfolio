@@ -42,7 +42,7 @@
 //   return (
 //     <section className="min-h-screen py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 transition-colors duration-500">
 //       <div className="container mx-auto px-6 md:px-12 lg:px-16">
-        
+
 //         {/* Header Section */}
 //         <motion.div
 //           initial={{ opacity: 0, y: -30 }}
@@ -84,8 +84,8 @@
 //             and{" "}
 //             <span className="font-semibold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
 //               Machine Learning Engineer
-//             </span>. 
-//             I specialize in creating intelligent, scalable web applications that blend cutting-edge technology 
+//             </span>.
+//             I specialize in creating intelligent, scalable web applications that blend cutting-edge technology
 //             with exceptional user experiences.
 //           </motion.p>
 //         </motion.div>
@@ -125,7 +125,7 @@
 //         </motion.div>
 
 //         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          
+
 //           {/* Left Column - Tabs Content */}
 //           <motion.div
 //             initial={{ opacity: 0, x: -50 }}
@@ -145,11 +145,10 @@
 //                   <button
 //                     key={tab.id}
 //                     onClick={() => setActiveTab(tab.id)}
-//                     className={`flex items-center gap-2 flex-1 px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
-//                       activeTab === tab.id
-//                         ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
-//                         : "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"
-//                     }`}
+//                     className={`flex items-center gap-2 flex-1 px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${activeTab === tab.id
+//                       ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
+//                       : "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"
+//                       }`}
 //                   >
 //                     <Icon size={20} />
 //                     {tab.label}
@@ -231,18 +230,18 @@
 //               {activeTab === "story" && (
 //                 <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
 //                   <p>
-//                     My journey in technology began with a curiosity about how things work behind the scenes. 
-//                     This passion led me to pursue Software Engineering and dive deep into both web development 
+//                     My journey in technology began with a curiosity about how things work behind the scenes.
+//                     This passion led me to pursue Software Engineering and dive deep into both web development
 //                     and artificial intelligence.
 //                   </p>
 //                   <p>
-//                     I believe in creating solutions that not only look beautiful but also solve real-world 
-//                     problems efficiently. My expertise spans across the entire development stack, from 
-//                     crafting pixel-perfect UIs to building robust backend systems and implementing 
+//                     I believe in creating solutions that not only look beautiful but also solve real-world
+//                     problems efficiently. My expertise spans across the entire development stack, from
+//                     crafting pixel-perfect UIs to building robust backend systems and implementing
 //                     intelligent machine learning models.
 //                   </p>
 //                   <p>
-//                     When I'm not coding, you'll find me exploring new technologies, contributing to 
+//                     When I'm not coding, you'll find me exploring new technologies, contributing to
 //                     open-source projects, or sharing knowledge with the developer community.
 //                   </p>
 //                 </div>
@@ -284,6 +283,7 @@
 //               </div>
 //             </div>
 
+
 //             {/* Download Resume */}
 //             <motion.a
 //               href="/resume.pdf"
@@ -299,30 +299,14 @@
 //                 <p className="text-sm text-gray-600 dark:text-gray-400">PDF - Updated recently</p>
 //               </div>
 //             </motion.a>
+            
+
 //           </motion.div>
 //         </div>
 //       </div>
 //     </section>
 //   );
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -551,3 +535,20 @@ export default function About() {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
