@@ -645,6 +645,8 @@
 import React, { useState } from "react";
 import projects from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
+/* eslint-disable no-unused-vars */
+//import { motion } from "framer-motion";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Filter, X, Grid3X3, List } from 'lucide-react';
 

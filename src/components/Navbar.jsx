@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+/* eslint-disable no-unused-vars */
+//import { motion } from "framer-motion";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Home, User, Folder, Mail, Code, Cpu } from 'lucide-react';
 
