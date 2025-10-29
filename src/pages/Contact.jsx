@@ -52,6 +52,23 @@ export default function Contact() {
     setLoading(false);
   };
 
+  // ✅ Open WhatsApp
+  const openWhatsApp = () => {
+    const phoneNumber = "923017511843";
+    const message = "Hello! I would like to get in touch with you.";
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
+  // ✅ Open Email
+  const openEmail = () => {
+    const email = "chtouqeerchtouqeermayo@gmail.com";
+    const subject = "Let's Work Together";
+    const body = "Hello Tauqeer,\n\nI would like to discuss a project with you.\n\nBest regards,";
+    const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = url;
+  };
+
   const contactInfo = [
     {
       icon: Mail,
@@ -139,11 +156,11 @@ export default function Contact() {
           </motion.p>
         </motion.div>
 
-        {/* Connect With Me Section - Now at the top of both columns */}
+        {/* Connect With Me Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.7 }}
           className="bg-white/80 dark:bg-gray-800/80 rounded-xl sm:rounded-2xl p-4 sm:p-6 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-lg mb-6 sm:mb-8"
         >
           <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 text-center">
@@ -160,7 +177,7 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8 + index * 0.1 }}
+                  transition={{ delay: 0.9 + index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
                   className={`bg-gradient-to-r ${social.color} text-white p-2 sm:p-3 rounded-lg sm:rounded-xl text-center font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm flex-1 min-w-[110px] max-w-[130px]`}
                 >
@@ -170,20 +187,18 @@ export default function Contact() {
               );
             })}
 
-            {/* WhatsApp Button */}
-            <motion.a
-              href="https://wa.me/923017511843"
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* WhatsApp Button in Social Links */}
+            <motion.button
+              onClick={openWhatsApp}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.0 }}
+              transition={{ delay: 1.3 }}
               whileHover={{ scale: 1.05 }}
               className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-2 sm:p-3 rounded-lg sm:rounded-xl text-center font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm flex-1 min-w-[110px] max-w-[130px]"
             >
               <MessageCircle size={16} className="text-white" />
               <span>WhatsApp</span>
-            </motion.a>
+            </motion.button>
           </div>
         </motion.div>
 
@@ -209,14 +224,8 @@ export default function Contact() {
                     <motion.a
                       key={item.title}
                       href={item.link}
-                      target={
-                        item.link.startsWith("http") ? "_blank" : "_self"
-                      }
-                      rel={
-                        item.link.startsWith("http")
-                          ? "noopener noreferrer"
-                          : ""
-                      }
+                      target={item.link.startsWith("http") || item.link.startsWith("mailto") || item.link.startsWith("tel") ? "_blank" : "_self"}
+                      rel={item.link.startsWith("http") ? "noopener noreferrer" : ""}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 1.0 + index * 0.1 }}
@@ -261,58 +270,71 @@ export default function Contact() {
               className="bg-white/80 dark:bg-gray-800/80 rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl p-4 sm:p-6 md:p-8 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
             >
               {activeTab === "form" ? (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label className="block text-gray-700 dark:text-gray-200 font-semibold mb-2">Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                      placeholder="Your Name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 dark:text-gray-200 font-semibold mb-2">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 dark:text-gray-200 font-semibold mb-2">Message</label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows="4"
-                      className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                      placeholder="Your message..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-300"
+                <>
+                  {/* Email Button - Form ke upper part mein */}
+                  <motion.button
+                    onClick={openEmail}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 mb-6"
                   >
-                    {loading ? "Sending..." : "Send Message"}
-                  </button>
+                    <Mail size={20} className="text-white" />
+                    <span>Send Email Directly</span>
+                  </motion.button>
 
-                  {status && (
-                    <p className="text-center mt-4 text-sm font-medium text-gray-700 dark:text-gray-300">
-                      {status}
-                    </p>
-                  )}
-                </form>
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                      <label className="block text-gray-700 dark:text-gray-200 font-semibold mb-2">Name</label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Your Name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-gray-700 dark:text-gray-200 font-semibold mb-2">Email</label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="you@example.com"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-gray-700 dark:text-gray-200 font-semibold mb-2">Message</label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows="4"
+                        className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Your message..."
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-300"
+                    >
+                      {loading ? "Sending..." : "Send Message"}
+                    </button>
+
+                    {status && (
+                      <p className="text-center mt-4 text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {status}
+                      </p>
+                    )}
+                  </form>
+                </>
               ) : (
                 <div className="text-center py-8 sm:py-12">
                   <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">💬</div>
@@ -322,10 +344,8 @@ export default function Contact() {
                   <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6 max-w-md mx-auto px-4">
                     Prefer instant communication? Reach out directly through WhatsApp or social media for faster response.
                   </p>
-                  <motion.a
-                    href="https://wa.me/923017511843"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <motion.button
+                    onClick={openWhatsApp}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg sm:rounded-xl font-semibold shadow-lg hover:shadow-green-500/25 transition-all duration-300 text-sm sm:text-base"
@@ -333,7 +353,7 @@ export default function Contact() {
                     <MessageCircle size={16} />
                     Chat on WhatsApp
                     <ExternalLink size={16} />
-                  </motion.a>
+                  </motion.button>
                 </div>
               )}
             </motion.div>
