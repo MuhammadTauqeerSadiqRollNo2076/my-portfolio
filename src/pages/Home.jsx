@@ -183,7 +183,7 @@ export default function Home() {
               <img
                 src={profileImage}
                 alt="Muhammad Tauqeer Sadiq - Software Engineer"
-                className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 object-fit rounded-full border-4 border-gray-800 shadow-2xl transform group-hover:scale-105 transition duration-500 backdrop-blur-sm"
+                className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 object-cover rounded-full border-4 border-gray-800 shadow-2xl transform group-hover:scale-105 transition duration-500 backdrop-blur-sm"
               />
 
               {/* Floating elements */}
