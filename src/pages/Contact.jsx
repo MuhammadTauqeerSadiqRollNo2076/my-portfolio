@@ -139,13 +139,61 @@ export default function Contact() {
           </motion.p>
         </motion.div>
 
+        {/* Connect With Me Section - Now at the top of both columns */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="bg-white/80 dark:bg-gray-800/80 rounded-xl sm:rounded-2xl p-4 sm:p-6 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-lg mb-6 sm:mb-8"
+        >
+          <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 text-center">
+            Connect With Me
+          </h3>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            {socialLinks.map((social, index) => {
+              const Icon = social.icon;
+              return (
+                <motion.a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.8 + index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  className={`bg-gradient-to-r ${social.color} text-white p-2 sm:p-3 rounded-lg sm:rounded-xl text-center font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm flex-1 min-w-[110px] max-w-[130px]`}
+                >
+                  <Icon size={16} className="text-white" />
+                  <span>{social.name}</span>
+                </motion.a>
+              );
+            })}
+
+            {/* WhatsApp Button */}
+            <motion.a
+              href="https://wa.me/923017511843"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.0 }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-2 sm:p-3 rounded-lg sm:rounded-xl text-center font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm flex-1 min-w-[110px] max-w-[130px]"
+            >
+              <MessageCircle size={16} className="text-white" />
+              <span>WhatsApp</span>
+            </motion.a>
+          </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {/* Left Column - Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.6 }}
-            className="lg:col-span-1 space-y-4 sm:space-y-6"
+            transition={{ delay: 0.8 }}
+            className="lg:col-span-1"
           >
             {/* Contact Information Cards */}
             <div className="bg-white/80 dark:bg-gray-800/80 rounded-xl sm:rounded-2xl p-4 sm:p-6 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-lg">
@@ -171,7 +219,7 @@ export default function Contact() {
                       }
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + index * 0.1 }}
+                      transition={{ delay: 1.0 + index * 0.1 }}
                       className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gray-50 dark:bg-gray-700/50 hover:bg-indigo-50 dark:hover:bg-gray-700 transition-all duration-300 group cursor-pointer"
                     >
                       <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg group-hover:bg-indigo-200 dark:group-hover:bg-indigo-900/50 transition-colors flex-shrink-0">
@@ -196,54 +244,6 @@ export default function Contact() {
                 })}
               </div>
             </div>
-
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
-              className="bg-white/80 dark:bg-gray-800/80 rounded-xl sm:rounded-2xl p-4 sm:p-6 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-lg"
-            >
-              <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4">
-                Connect With Me
-              </h3>
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                {socialLinks.map((social, index) => {
-                  const Icon = social.icon;
-                  return (
-                    <motion.a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1.4 + index * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      className={`bg-gradient-to-r ${social.color} text-white p-2 sm:p-3 rounded-lg sm:rounded-xl text-center font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm`}
-                    >
-                      <Icon size={16} className="text-white" />
-                      <span>{social.name}</span>
-                    </motion.a>
-                  );
-                })}
-
-                {/* WhatsApp Button */}
-                <motion.a
-                  href="https://wa.me/923017511843"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.6 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="col-span-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white p-2 sm:p-3 rounded-lg sm:rounded-xl text-center font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm"
-                >
-                  <MessageCircle size={16} className="text-white" />
-                  <span>WhatsApp</span>
-                </motion.a>
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Right Column - Contact Form */}
