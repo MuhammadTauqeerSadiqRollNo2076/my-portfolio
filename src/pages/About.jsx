@@ -10,14 +10,14 @@ export default function About() {
 
   const stats = [
     { 
-      number: "10+", 
+      number: "6+", 
       label: "Projects", 
       icon: Code,
       description: "Web & ML Solutions",
       color: "from-blue-500 to-cyan-500"
     },
     { 
-      number: "1+", 
+      number: "1", 
       label: "Year Experience", 
       icon: Briefcase,
       description: "Professional Development",
@@ -97,7 +97,7 @@ export default function About() {
     {
       company: "Ezeelogic",
       role: "MERN Stack Developer",
-      period: "2024 - Present",
+      period: "2025 - Present",
       type: "Full Time",
       icon: Briefcase,
       achievements: ["Scalable web applications", "Team collaboration", "Client projects"]
@@ -105,7 +105,7 @@ export default function About() {
     {
       company: "Code Lab",
       role: "Web Development Internee",
-      period: "4 Months",
+      period: "5 Months",
       type: "Internship",
       icon: BookOpen,
       achievements: ["Frontend development", "Project deployment", "Code reviews"]
