@@ -1,28 +1,103 @@
-import React from 'react';
-//import { motion } from 'framer-motion';
-/* eslint-disable no-unused-vars */
+import React from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Heart, Code, Cpu, ArrowUp, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, Heart, Code, Cpu, ArrowUp } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-export default function Footer() {
+function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNavigation = (path) => {
+    if (location.pathname === path) {
+      scrollToTop();
+    } else {
+      navigate(path);
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
+    }
+  };
+
+  // ✅ Email click handle (Gmail + fallback)
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+    const email = "chtouqeerchtouqeermayo@gmail.com";
+
+    // Try Gmail compose in browser
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${email}`;
+    const newWindow = window.open(gmailUrl, "_blank");
+
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
+      // Fallback: open default email client
+      window.location.href = `mailto:${email}`;
+
+      // If that also fails, copy to clipboard and notify
+      setTimeout(() => {
+        navigator.clipboard.writeText(email).then(() => {
+          showEmailNotification(email);
+        }).catch(() => {
+          showEmailNotification(email);
+        });
+      }, 800);
+    }
+  };
+
+  // ✅ Custom notification (Email copied)
+  const showEmailNotification = (email) => {
+    const notification = document.createElement("div");
+    notification.innerHTML = `
+      <div style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4F46E5;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10000;
+        font-family: system-ui;
+        font-size: 14px;
+        animation: slideIn 0.3s ease-out;
+      ">
+        📧 Email copied: ${email}
+      </div>
+    `;
+
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      if (document.body.contains(notification)) document.body.removeChild(notification);
+      if (document.head.contains(style)) document.head.removeChild(style);
+    }, 3000);
   };
 
   const quickLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Contact', path: '/contact' }
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Projects", path: "/projects" },
+    { name: "Contact", path: "/contact" },
   ];
 
   const techStack = [
-    { name: 'React', icon: '⚛️' },
-    { name: 'Node.js', icon: '🟢' },
-    { name: 'MongoDB', icon: '🍃' },
-    { name: 'Tailwind', icon: '💨' },
-    { name: 'Python', icon: '🐍' },
-    { name: 'TensorFlow', icon: '🧠' }
+    { name: "React", icon: "⚛️" },
+    { name: "Node.js", icon: "🟢" },
+    { name: "MongoDB", icon: "🍃" },
+    { name: "Tailwind", icon: "💨" },
+    { name: "Python", icon: "🐍" },
+    { name: "TensorFlow", icon: "🧠" },
   ];
 
   return (
@@ -34,17 +109,17 @@ export default function Footer() {
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }}></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
+        ></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 relative z-10">
-        
-        {/* Main Footer Content */}
         <div className="grid md:grid-cols-3 gap-8 mb-8">
-          
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -58,15 +133,16 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">Engr. Tauqeer Sadiq</h3>
-                <p className="text-sm text-gray-400">ML Engineer & Full Stack Developer</p>
+                <p className="text-sm text-gray-400">
+                  ML Engineer & Full Stack Developer
+                </p>
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              Crafting intelligent digital solutions with cutting-edge technologies 
+              Crafting intelligent digital solutions with cutting-edge technologies
               and a passion for innovation.
             </p>
-            
-            {/* Tech Stack */}
+
             <div className="flex flex-wrap gap-2">
               {techStack.map((tech, index) => (
                 <motion.span
@@ -93,16 +169,21 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
             <div className="space-y-2">
               {quickLinks.map((link, index) => (
-                <motion.a
+                <motion.button
                   key={link.name}
-                  href={link.path}
+                  onClick={() => handleNavigation(link.path)}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 + index * 0.1 }}
-                  className="block text-gray-400 hover:text-indigo-400 transition-colors duration-300 text-sm"
+                  className={`block text-sm w-full text-left bg-transparent border-none cursor-pointer transition-colors duration-300 ${
+                    location.pathname === link.path
+                      ? "text-indigo-400 font-semibold"
+                      : "text-gray-400 hover:text-indigo-400"
+                  }`}
+                  whileHover={{ x: 5 }}
                 >
                   {link.name}
-                </motion.a>
+                </motion.button>
               ))}
             </div>
           </motion.div>
@@ -118,35 +199,53 @@ export default function Footer() {
             <p className="text-gray-400 text-sm mb-4">
               Ready to start your next project? Let's build something amazing together.
             </p>
-            
-            {/* Social Icons */}
+
+            {/* ✅ Fixed Social Icons */}
             <div className="flex justify-center md:justify-end gap-4 mb-4">
-              {[
-                { icon: Github, href: "https://github.com/", label: "GitHub" },
-                { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
-                { icon: Mail, href: "mailto:engr.tauqeersadiq@gmail.com", label: "Email" }
-              ].map((social, index) => {
-                const Icon = social.icon;
-                return (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                    whileHover={{ scale: 1.2, y: -2 }}
-                    className="p-3 bg-gray-800/50 hover:bg-indigo-600 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300 group"
-                    aria-label={social.label}
-                  >
-                    <Icon size={20} className="text-gray-400 group-hover:text-white transition-colors" />
-                  </motion.a>
-                );
-              })}
+              <motion.a
+                href="https://github.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+                whileHover={{ scale: 1.2, y: -2 }}
+                className="p-3 bg-gray-800/50 hover:bg-indigo-600 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300 group"
+                aria-label="GitHub"
+              >
+                <Github size={20} className="text-gray-400 group-hover:text-white transition-colors" />
+              </motion.a>
+
+              <motion.a
+                href="https://linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6 }}
+                whileHover={{ scale: 1.2, y: -2 }}
+                className="p-3 bg-gray-800/50 hover:bg-indigo-600 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300 group"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} className="text-gray-400 group-hover:text-white transition-colors" />
+              </motion.a>
+
+              {/* ✅ Fixed Email Icon */}
+              <motion.a
+                href="mailto:chtouqeerchtouqeermayo@gmail.com"
+                onClick={handleEmailClick}
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.7 }}
+                whileHover={{ scale: 1.2, y: -2 }}
+                className="p-3 bg-gray-800/50 hover:bg-indigo-600 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300 group"
+                aria-label="Email"
+                title="Click to email me"
+              >
+                <Mail size={20} className="text-gray-400 group-hover:text-white transition-colors" />
+              </motion.a>
             </div>
 
-            {/* Scroll to Top */}
             <motion.button
               onClick={scrollToTop}
               whileHover={{ scale: 1.1 }}
@@ -174,14 +273,12 @@ export default function Footer() {
           transition={{ delay: 0.6 }}
           className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500"
         >
-          {/* Copyright */}
           <div className="flex items-center gap-2">
             <span>© {new Date().getFullYear()} Engr. Tauqeer Sadiq</span>
             <span className="text-gray-600">•</span>
             <span>All rights reserved</span>
           </div>
 
-          {/* Built with love */}
           <div className="flex items-center gap-2">
             <span>Built with</span>
             <motion.div
@@ -197,7 +294,6 @@ export default function Footer() {
             </span>
           </div>
 
-          {/* Status */}
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             <span>Available for new projects</span>
@@ -205,16 +301,15 @@ export default function Footer() {
         </motion.div>
       </div>
 
-      {/* Floating AI Icon */}
       <motion.div
-        animate={{ 
+        animate={{
           y: [0, -10, 0],
-          rotate: [0, 5, -5, 0]
+          rotate: [0, 5, -5, 0],
         }}
-        transition={{ 
+        transition={{
           duration: 4,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
         className="absolute bottom-4 right-4 opacity-10"
       >
@@ -223,3 +318,5 @@ export default function Footer() {
     </motion.footer>
   );
 }
+
+export default Footer;
